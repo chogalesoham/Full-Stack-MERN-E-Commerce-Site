@@ -74,7 +74,7 @@ body {
 nav {
   max-width: var(--max-width-1200);
   margin: auto;
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -116,17 +116,17 @@ nav {
   gap: 2rem;
 }
 
-.nav__icons span a {
+/* .nav__icons span a {
   font-size: 1.25rem;
   color: var(--text-dark);
-}
+} */
 
 .nav__icons span a:hover {
   color: var(--primary-color);
 }
 
 .header__container {
-  min-height: 650px;
+  min-height: 600px;
   background-color: var(--primary-color-light);
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
