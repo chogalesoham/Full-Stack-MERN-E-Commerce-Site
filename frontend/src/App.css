@@ -576,6 +576,9 @@ nav {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
+  .search-bar {
+    padding: 15px 5px;
+  }
 }
 
 .nav__icons span a.dropdown-items {
@@ -590,6 +593,25 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .pp-3 {
   padding: 15px 10px;
+}
+
+.search-bar {
+  padding: 10px 15px;
+  border: 1px solid rgb(182, 180, 180);
+  border-radius: 5px 0px 0px 5px;
+  -webkit-border-radius: 5px 0px 0px 5px;
+  -moz-border-radius: 5px 0px 0px 5px;
+  -ms-border-radius: 5px 0px 0px 5px;
+  -o-border-radius: 5px 0px 0px 5px;
+}
+
+.search-button {
+  padding: 11px 17px;
+  border: 1px solid rgb(182, 180, 180);
+  -webkit-border-radius: 0px 5px 5px 0px;
+  -moz-border-radius: 0px 5px 5px 0px;
+  -ms-border-radius: 0px 5px 5px 0px;
+  -o-border-radius: 0px 5px 5px 0px;
 }
 
 /* .add-product-InputCSS {
