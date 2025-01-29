@@ -11,18 +11,18 @@ const Categories = () => {
       image: category1,
     },
     {
-      name: "Accessories",
+      name: "Dress Collection",
       path: "accessories",
       image: category2,
     },
     {
-      name: "Accessories",
-      path: "accessories",
+      name: "Jewellery",
+      path: "jewellery",
       image: category3,
     },
     {
-      name: "Accessories",
-      path: "accessories",
+      name: "Cosmeties",
+      path: "cosmeties",
       image: category4,
     },
   ];
@@ -33,7 +33,7 @@ const Categories = () => {
           <Link
             className=" categories__card border border-amber-600 rounded-xl py-3 hover:bg-orange-50"
             key={index}
-            to={`/${item?.path}`}
+            to={`/categories/${item?.path}`}
           >
             <img src={item?.image} alt={item?.name} />
             <h4 className=" my-2">{item?.name}</h4>
