@@ -5,7 +5,7 @@ import { FaRegUser } from "react-icons/fa";
 
 const Header = () => {
   return (
-    <header className="fixed-nav-bar w-nav shadow">
+    <header className="fixed-nav-bar w-nav shadow bg-[#f5eff2]">
       <nav className=" container mx-auto px-4 flex justify-between items-center">
         <ul className=" nav__links">
           <li className=" link">

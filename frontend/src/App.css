@@ -134,6 +134,8 @@ nav {
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   align-items: center;
+  margin-top: 6px;
+  border-radius: 10px;
 }
 
 .header__content {
@@ -456,6 +458,7 @@ nav {
   margin-bottom: 1rem;
   font-weight: 500;
   color: var(--text-light);
+  text-align: left;
 }
 
 .footer__col p span {
