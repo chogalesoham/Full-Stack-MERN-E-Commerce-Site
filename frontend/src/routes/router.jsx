@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App.jsx";
 import Home from "../pages/home.jsx";
 import Categories from "../pages/categories.jsx";
+import Search from "../pages/search.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       {
         path: "/categories/:categoryName",
         element: <Categories />,
+      },
+      {
+        path: "/search",
+        element: <Search />,
       },
       {
         path: "/shop",

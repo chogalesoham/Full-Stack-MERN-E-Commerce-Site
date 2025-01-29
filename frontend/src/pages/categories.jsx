@@ -7,8 +7,6 @@ const Categories = () => {
   const { categoryName } = useParams();
   const [filterdProducts, setFilterdProducts] = useState([]);
 
-  console.log("categoryName", filterdProducts);
-
   useEffect(() => {
     const filterProducts = products.filter(
       (product) => product?.category == categoryName.toLocaleLowerCase()
