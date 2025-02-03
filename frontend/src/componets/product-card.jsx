@@ -23,7 +23,7 @@ const ProductCard = ({ products }) => {
             <h4>{item?.name}</h4>
             <p>
               {item?.price}
-              {item?.oldPrice ? <s>{item?.oldPrice}</s> : null}
+              {item?.oldPrice ? <s> {item?.oldPrice} </s> : null}
             </p>
             <RatingStar ratings={item?.rating} />
           </div>
