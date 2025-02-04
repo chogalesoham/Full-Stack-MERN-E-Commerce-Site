@@ -9,7 +9,7 @@ const ProductCard = ({ products }) => {
       {products.map((item, index) => (
         <div key={index} className=" product__card relative shadow rounded-lg">
           <div>
-            <Link to={`/shop/${item?._id}`}>
+            <Link to={`/shop/${item?.id}`}>
               <img
                 style={{ padding: "10px" }}
                 src={item?.image}
