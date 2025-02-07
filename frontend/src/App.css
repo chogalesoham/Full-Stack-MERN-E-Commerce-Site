@@ -618,6 +618,10 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-bottom: 12px;
 }
 
+.mm {
+  margin: 5px;
+}
+
 /* .add-product-InputCSS {
   @apply mt-1 block py-2.5 px-4 w-full rounded-md bg-gray-100 border-gray-300 shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
 } */
