@@ -2,8 +2,15 @@ import { Link } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import CartMadel from "./cart-madel";
 
 const Header = () => {
+  const products = useSelector((state) => state.cart.products);
+  console.log(products, "000000000000000");
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   return (
     <header className="fixed-nav-bar w-nav shadow bg-[#f5eff2]">
       <nav className=" container mx-auto px-4 flex justify-between items-center">
@@ -33,14 +40,17 @@ const Header = () => {
             </Link>
           </span>
           <span>
-            <button className=" hover:text-[#ed3849] relative">
+            <button
+              onClick={() => setIsCartOpen(!isCartOpen)}
+              className=" hover:text-[#ed3849] relative"
+            >
               <HiOutlineShoppingBag className=" text-xl" />
 
               <sup
                 className=" text-sm absolute h-5 w-5 to-10% text-white rounded-full bg-[#ed3849] text-center
             "
               >
-                0
+                {products.length}
               </sup>
             </button>
           </span>
@@ -51,6 +61,14 @@ const Header = () => {
           </span>
         </div>
       </nav>
+
+      {isCartOpen && (
+        <CartMadel
+          products={products}
+          isCartOpen={isCartOpen}
+          setIsCartOpen={setIsCartOpen}
+        />
+      )}
     </header>
   );
 };
