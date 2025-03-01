@@ -15,7 +15,7 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const isExist = state.products.find(
-        (product) => product._id === action.payload.id
+        (product) => product.id === action.payload.id
       );
 
       if (!isExist) {
@@ -32,18 +32,22 @@ const cartSlice = createSlice({
   },
 });
 
+//utility functions
 export const setSelectedItem = (state) =>
-  state.products.reduce((total, product) => total + product.quantity, 0);
+  state.products.reduce((total, product) => {
+    return Number(total + product.quantity);
+  }, 0);
 
 export const setTotalPrice = (state) =>
-  state.products.reduce(
-    (total, product) => total + product.quantity * product.price,
-    0
-  );
+  state.products.reduce((total, product) => {
+    return Number(total + product.quantity * product.price);
+  }, 0);
 
 export const setTax = (state) => setTotalPrice(state) * state.taxRate;
 
-export const setGrandTotal = (state) => setTotalPrice(state) + setTax(state);
+export const setGrandTotal = (state) => {
+  return setTotalPrice(state) + setTax(state) * state.taxRate;
+};
 
 export const { addToCart } = cartSlice.actions;
 export default cartSlice.reducer;

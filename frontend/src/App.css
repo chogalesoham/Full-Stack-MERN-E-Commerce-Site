@@ -58,10 +58,10 @@
   background-color: var(--primary-color-dark);
 }
 
-img {
+/* img {
   width: 100%;
   display: flex;
-}
+} */
 
 a {
   text-decoration: none;
@@ -620,6 +620,10 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .mm {
   margin: 5px;
+}
+
+.pp-2 {
+  padding: 3px;
 }
 
 /* .add-product-InputCSS {

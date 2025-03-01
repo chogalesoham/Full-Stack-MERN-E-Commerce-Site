@@ -3,13 +3,9 @@ import { IoSearch } from "react-icons/io5";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { useState } from "react";
-import CartMadel from "./cart-madel";
 
 const Header = () => {
   const products = useSelector((state) => state.cart.products);
-  console.log(products, "000000000000000");
-  const [isCartOpen, setIsCartOpen] = useState(false);
 
   return (
     <header className="fixed-nav-bar w-nav shadow bg-[#f5eff2]">
@@ -40,10 +36,7 @@ const Header = () => {
             </Link>
           </span>
           <span>
-            <button
-              onClick={() => setIsCartOpen(!isCartOpen)}
-              className=" hover:text-[#ed3849] relative"
-            >
+            <Link to="cart" className=" hover:text-[#ed3849] relative">
               <HiOutlineShoppingBag className=" text-xl" />
 
               <sup
@@ -52,7 +45,7 @@ const Header = () => {
               >
                 {products.length}
               </sup>
-            </button>
+            </Link>
           </span>
           <span style={{ marginBottom: "6px" }} className=" mb-3">
             <Link to="login">
@@ -61,14 +54,6 @@ const Header = () => {
           </span>
         </div>
       </nav>
-
-      {isCartOpen && (
-        <CartMadel
-          products={products}
-          isCartOpen={isCartOpen}
-          setIsCartOpen={setIsCartOpen}
-        />
-      )}
     </header>
   );
 };
