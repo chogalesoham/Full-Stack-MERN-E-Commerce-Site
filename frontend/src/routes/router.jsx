@@ -6,6 +6,8 @@ import Search from "../pages/search.jsx";
 import Shop from "../pages/shop.jsx";
 import SingleProduct from "../pages/single-product.jsx";
 import Cart from "../pages/cart.jsx";
+import Login from "../pages/login.jsx";
+import Register from "../pages/ragister.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -44,6 +46,14 @@ const router = createBrowserRouter([
         element: <div>Contact page</div>,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ]);
 
