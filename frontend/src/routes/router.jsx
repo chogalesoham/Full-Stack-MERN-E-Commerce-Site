@@ -5,6 +5,7 @@ import Categories from "../pages/categories.jsx";
 import Search from "../pages/search.jsx";
 import Shop from "../pages/shop.jsx";
 import SingleProduct from "../pages/single-product.jsx";
+import Cart from "../pages/cart.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/shop",
         element: <Shop />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       {
         path: "/shop/:id",
