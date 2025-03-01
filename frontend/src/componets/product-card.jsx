@@ -3,12 +3,17 @@ import { MdAddShoppingCart } from "react-icons/md";
 import RatingStar from "./rating-star";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/features/cart-slice";
+import toast from "react-hot-toast";
 
 const ProductCard = ({ products }) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
+    toast.success("Product added to cart", {
+      duration: 2000,
+      position: "top-right",
+    });
   };
 
   return (
