@@ -1,10 +1,26 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import OrderSummary from "../componets/order-summary";
 import EmptyCart from "../assets/empty-cart.AVIF";
+import { removeFromCart, updateQuantity } from "../redux/features/cart-slice";
+import toast from "react-hot-toast";
 
 const Cart = () => {
   const products = useSelector((state) => state.cart.products);
+  const despatch = useDispatch();
+
+  const handelQuantity = (type, id) => {
+    const payload = { type, id };
+    despatch(updateQuantity(payload));
+  };
+
+  const handelRemoveFromCart = (id) => {
+    despatch(removeFromCart({ id }));
+    toast.error("Product Remove from cart", {
+      duration: 2000,
+      position: "top-right",
+    });
+  };
 
   return (
     <section
@@ -55,6 +71,7 @@ const Cart = () => {
                 className=" w-full md:w-auto flex justify-center items-center border rounded-lg bg-gray-100 shadow-md"
               >
                 <button
+                  onClick={() => handelQuantity("DEC", item.id)}
                   style={{ padding: "6px 12px" }}
                   className="bg-gray-300 rounded-l-lg hover:bg-gray-400"
                 >
@@ -64,9 +81,10 @@ const Cart = () => {
                   style={{ padding: "0 12px" }}
                   className="text-lg font-semibold"
                 >
-                  1
+                  {item.quantity}
                 </span>
                 <button
+                  onClick={() => handelQuantity("INC", item.id)}
                   style={{ padding: "6px 12px" }}
                   className="bg-gray-300 rounded-r-lg hover:bg-gray-400"
                 >
@@ -75,6 +93,7 @@ const Cart = () => {
               </div>
               <div className="mt-2 sm:mt-0 w-full md:w-auto">
                 <button
+                  onClick={(e) => handelRemoveFromCart(item.id)}
                   style={{ padding: "8px 16px" }}
                   className="bg-red-600 w-full  text-white rounded-lg hover:bg-red-700 transition"
                 >

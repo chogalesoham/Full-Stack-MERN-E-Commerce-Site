@@ -1,10 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from "../redux/features/cart-slice";
 
 const OrderSummary = () => {
   const { selectedItems, totalPrice, tax, taxRate, grandTotal } = useSelector(
     (state) => state.cart
   );
+
+  const dispatch = useDispatch();
 
   return (
     <div
@@ -50,6 +53,7 @@ const OrderSummary = () => {
         </div>
         <div style={{ marginTop: "16px" }} className="flex flex-col gap-3">
           <button
+            onClick={() => dispatch(clearCart())}
             style={{ padding: "10px" }}
             className="bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
           >
