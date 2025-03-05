@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginUserMutation } from "../redux/features/auth-api-slice";
+import toast from "react-hot-toast";
+import { LiaSpinnerSolid } from "react-icons/lia";
 
 const Login = () => {
   const [message, setMessage] = useState("");
@@ -7,6 +11,10 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const [loginUser, { isLoading }] = useLoginUserMutation();
 
   const handleLoginData = async (e) => {
     setLoginData({
@@ -17,7 +25,18 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Login data", loginData);
+    try {
+      const response = await loginUser(loginData);
+      toast.success("Login successful", {
+        duration: 2000,
+        position: "top-right",
+      });
+      navigate("/");
+      console.log(response);
+    } catch (error) {
+      console.log(error.message);
+      setMessage("Please Provide valid User Info !");
+    }
   };
 
   return (
@@ -62,10 +81,14 @@ const Login = () => {
           )}
           <button
             type="submit"
-            className="w-full bg-red-500 text-white hover:bg-red-600 font-medium rounded-lg shadow-md transition duration-300 cursor-pointer"
+            className="w-full bg-red-500 text-white hover:bg-red-600 font-medium rounded-lg shadow-md transition duration-300 cursor-pointer flex items-center justify-center"
             style={{ marginTop: "1rem", padding: "0.75rem" }}
           >
-            Login
+            {isLoading ? (
+              <LiaSpinnerSolid className=" animate-ping" />
+            ) : (
+              "Login"
+            )}
           </button>
         </form>
         <p
