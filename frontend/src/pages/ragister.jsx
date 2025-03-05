@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useRegisterUserMutation } from "../redux/features/auth-api-slice";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const [message, setMessage] = useState("");
@@ -9,6 +10,8 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const [registerUser, { isLoading }] = useRegisterUserMutation();
+  const navigate = useNavigate();
 
   const handleRegisterData = async (e) => {
     setRegisterData({
@@ -19,7 +22,16 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log("Register data", registerData);
+    try {
+      await registerUser(registerData);
+      toast.success("Registration successful", {
+        duration: 2000,
+        position: "top-right",
+      });
+      navigate("/login");
+    } catch (error) {
+      setMessage("Registration failed");
+    }
   };
 
   return (
@@ -74,10 +86,14 @@ const Register = () => {
           )}
           <button
             type="submit"
-            className="w-full bg-red-500 text-white hover:bg-red-600 font-medium rounded-lg shadow-md transition duration-300 cursor-pointer"
+            className="w-full bg-red-500 text-white hover:bg-red-600 font-medium rounded-lg shadow-md transition duration-300 cursor-pointer flex items-center justify-center "
             style={{ marginTop: "1rem", padding: "0.75rem" }}
           >
-            Register Now
+            {isLoading ? (
+              <LiaSpinnerSolid className=" animate-ping" />
+            ) : (
+              "Register Now"
+            )}
           </button>
         </form>
         <p

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../redux/features/auth-api-slice";
 import toast from "react-hot-toast";
 import { LiaSpinnerSolid } from "react-icons/lia";
+import { setUser } from "../redux/features/auth-slice";
 
 const Login = () => {
   const [message, setMessage] = useState("");
@@ -27,6 +28,9 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await loginUser(loginData);
+      console.log(response);
+      const { token, userExist: user } = response.data;
+      dispatch(setUser({ user }));
       toast.success("Login successful", {
         duration: 2000,
         position: "top-right",
