@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const PORT = process.env.PORT || 8080;
 const connectDB = require("./src/config/db");
 const userRoutes = require("./src/Routes/user-route.js");
+const productsRoutes = require("./src/Routes/products-routs.js");
 
 // Connect to MongoDB
 connectDB();
@@ -28,7 +29,11 @@ app.get("/", (req, res) => {
   res.status(200).json({ mesaage: "Full-Satck (MERN) E-Commers Site BackEnd" });
 });
 
+//Auth Routes
 app.use("/api", userRoutes);
+
+//Products Routes
+app.use("/api/products", productsRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server Start at: ${PORT}`);
