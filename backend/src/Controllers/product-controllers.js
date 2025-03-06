@@ -98,4 +98,78 @@ const getSingleProduct = async (req, res) => {
   }
 };
 
-module.exports = { cerateNewProduct, getAllProducts, getSingleProduct };
+//update product
+const updateProduct = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const updateProduct = await productsModel.findByIdAndUpdate(
+      productId,
+      { ...req.body },
+      { new: true }
+    );
+    if (!updateProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    res
+      .status(200)
+      .json({ message: "Product updated successfully", updateProduct });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+//delete product
+const deleteProduct = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const detetedProduct = productsModel.findByIdAndDelete(productId);
+    if (!detetedProduct) {
+      return res.status(404).json({ message: "Product Not found" });
+    }
+    await reviewModel.deleteMany({ productId: productId });
+    res
+      .status(200)
+      .json({ message: "Product deleted succsefull", productId: productId });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+//get related product
+const SingleProductRelatedProducts = async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (!id) {
+      return res.status(400).json({ message: "product id not found" });
+    }
+    const product = await productsModel.findById(id);
+    if (!product) {
+      return res.status(404).json({ message: "product not found" });
+    }
+
+    const titleRegex = new RegExp(
+      product.name
+        .split(" ")
+        .filter((word) => word.length > 1)
+        .join("|"),
+      "i"
+    );
+    const relatedProducts = await productsModel.find({
+      _id: { $ne: id },
+      $or: [{ name: { $regex: titleRegex } }, { category: product.category }],
+    });
+
+    res.status(200).json({ message: "Related Products", relatedProducts });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = {
+  cerateNewProduct,
+  getAllProducts,
+  getSingleProduct,
+  updateProduct,
+  deleteProduct,
+  SingleProductRelatedProducts,
+};
