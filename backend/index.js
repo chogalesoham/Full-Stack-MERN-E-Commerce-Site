@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 8080;
 const connectDB = require("./src/config/db");
 const userRoutes = require("./src/Routes/user-route.js");
 const productsRoutes = require("./src/Routes/products-routs.js");
+const reviewRoutes = require("./src/Routes/reviews-routes.js");
 
 // Connect to MongoDB
 connectDB();
@@ -34,6 +35,9 @@ app.use("/api", userRoutes);
 
 //Products Routes
 app.use("/api/products", productsRoutes);
+
+//Reviews Rouste
+app.use("/api/review", reviewRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server Start at: ${PORT}`);
