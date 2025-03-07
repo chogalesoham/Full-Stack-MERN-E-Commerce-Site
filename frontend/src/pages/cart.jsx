@@ -9,13 +9,13 @@ const Cart = () => {
   const products = useSelector((state) => state.cart.products);
   const despatch = useDispatch();
 
-  const handelQuantity = (type, id) => {
-    const payload = { type, id };
+  const handelQuantity = (type, _id) => {
+    const payload = { type, _id };
     despatch(updateQuantity(payload));
   };
 
-  const handelRemoveFromCart = (id) => {
-    despatch(removeFromCart({ id }));
+  const handelRemoveFromCart = (_id) => {
+    despatch(removeFromCart({ _id }));
     toast.error("Product Remove from cart", {
       duration: 2000,
       position: "top-right",
@@ -71,7 +71,7 @@ const Cart = () => {
                 className=" w-full md:w-auto flex justify-center items-center border rounded-lg bg-gray-100 shadow-md"
               >
                 <button
-                  onClick={() => handelQuantity("DEC", item.id)}
+                  onClick={() => handelQuantity("DEC", item._id)}
                   style={{ padding: "6px 12px" }}
                   className="bg-gray-300 rounded-l-lg hover:bg-gray-400"
                 >
@@ -84,7 +84,7 @@ const Cart = () => {
                   {item.quantity}
                 </span>
                 <button
-                  onClick={() => handelQuantity("INC", item.id)}
+                  onClick={() => handelQuantity("INC", item._id)}
                   style={{ padding: "6px 12px" }}
                   className="bg-gray-300 rounded-r-lg hover:bg-gray-400"
                 >
@@ -93,7 +93,7 @@ const Cart = () => {
               </div>
               <div className="mt-2 sm:mt-0 w-full md:w-auto">
                 <button
-                  onClick={(e) => handelRemoveFromCart(item.id)}
+                  onClick={(e) => handelRemoveFromCart(item._id)}
                   style={{ padding: "8px 16px" }}
                   className="bg-red-600 w-full  text-white rounded-lg hover:bg-red-700 transition"
                 >

@@ -1,11 +1,36 @@
 import { RiArrowRightSLine } from "react-icons/ri";
 import { Link, useParams } from "react-router-dom";
 import RatingStar from "../componets/rating-star";
+import { useDispatch } from "react-redux";
+import { useGetSingleProductQuery } from "../redux/features/products-slice";
+import { addToCart } from "../redux/features/cart-slice";
+import toast from "react-hot-toast";
 
 const SingleProduct = () => {
   const { id } = useParams();
-  // console.log("prosuct id", id);
 
+  const dispatch = useDispatch();
+  const { data, error, isLoading } = useGetSingleProductQuery(id);
+  console.log(data);
+
+  const SingleProduct = data?.product || {};
+  const productReview = data?.reviews || {};
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+    toast.success("Product added to cart", {
+      duration: 2000,
+      position: "top-right",
+    });
+  };
+
+  console.log(SingleProduct, productReview);
+  if (isLoading) {
+    return <div>Loading....</div>;
+  }
+  if (error) {
+    return <div>Error....</div>;
+  }
   return (
     <>
       <section
@@ -17,47 +42,51 @@ const SingleProduct = () => {
           <span className=" hover:text-red-600">
             <Link to="/">Home</Link>
           </span>
-          <RiArrowRightSLine />s
+          <RiArrowRightSLine />
           <span className=" hover:text-red-600">
             <Link to="/shop">Shop</Link>
           </span>
           <RiArrowRightSLine />
-          <span className=" hover:text-red-600">Products NAme</span>
+          <span className=" hover:text-red-600">{SingleProduct?.name}</span>
         </div>
       </section>
 
       <section className=" section__container mt-8">
         <div className=" flex flex-col items-center md:flex-row gap-8">
           <div className=" md:w-1/2 w-full">
-            <img
-              className=" rounded-lg"
-              src="https://plus.unsplash.com/premium_photo-1664298355914-bc65d2c9af64?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            />
+            <img className=" rounded-lg" src={SingleProduct?.image} />
           </div>
           <div className=" md:w-1/2 w-full">
-            <h3 className=" text-2xl font-semibold margin-b">Product Name</h3>
+            <h3 className=" text-2xl font-semibold margin-b">
+              {SingleProduct?.name}
+            </h3>
             <p className=" text-xl text-red-600 margin-b">
-              $100 <s>$110</s>
+              ${SingleProduct?.price}
+              {"  "}
+              {SingleProduct?.oldPrice && <s> ${SingleProduct?.oldPrice}</s>}
             </p>
             <p className=" text-gray-700 margin-b">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Molestias eos sint at, quaerat labore non! Sunt distinctio vero
-              similique sapiente libero explicabo at voluptatum maxime
-              laudantium! Consequuntur eum suscipit incidunt.
+              {SingleProduct?.description}
             </p>
             <div>
               <p className="margin-b">
-                <strong>Category: </strong> Accessories
+                <strong>Category: </strong> {SingleProduct?.category}
               </p>
               <p className=" margin-b">
-                <strong>Color: </strong> Black
+                <strong>Color: </strong> {SingleProduct?.color}
               </p>
               <div className=" flex gap-1 items-center margin-b">
                 <strong>Rating: </strong>
-                <RatingStar ratings={"4"} />
+                <RatingStar ratings={SingleProduct?.rating} />
               </div>
             </div>
-            <button className="search-button bg-red-600 text-white cursor-pointer hover:bg-red-800">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleAddToCart(SingleProduct);
+              }}
+              className="search-button bg-red-600 text-white cursor-pointer hover:bg-red-800"
+            >
               Add to Card
             </button>
           </div>

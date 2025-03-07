@@ -15,14 +15,14 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const isExist = state.products.find(
-        (product) => product.id === action.payload.id
+        (product) => product._id === action.payload._id
       );
 
       if (!isExist) {
         state.products.push({ ...action.payload, quantity: 1 });
       } else {
         state.products = state.products.map((product) => {
-          if (product.id === action.payload.id) {
+          if (product._id === action.payload._id) {
             product.quantity += 1;
           }
           return product;
@@ -36,7 +36,7 @@ const cartSlice = createSlice({
     },
     updateQuantity: (state, action) => {
       const products = state.products.map((product) => {
-        if (product.id === action.payload.id) {
+        if (product._id === action.payload._id) {
           if (action.payload.type === "INC") {
             product.quantity += 1;
           } else if (action.payload.type === "DEC") {
@@ -54,7 +54,7 @@ const cartSlice = createSlice({
     },
     removeFromCart: (state, action) => {
       state.products = state.products.filter(
-        (product) => product.id !== action.payload.id
+        (product) => product._id !== action.payload._id
       );
       state.selectedItems = setSelectedItem(state);
       state.totalPrice = setTotalPrice(state);
