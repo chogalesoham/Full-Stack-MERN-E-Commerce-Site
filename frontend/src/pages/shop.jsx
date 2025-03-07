@@ -55,6 +55,15 @@ const Shop = () => {
     return <div>Erroor....</div>;
   }
 
+  const startProduct = (currentPage - 1) * productPerPage + 1;
+  const endProduct = startProduct + products.length - 1;
+
+  const handlePageChange = (pageNumber) => {
+    if (pageNumber > 0 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+    }
+  };
+
   return (
     <>
       <section
@@ -81,11 +90,52 @@ const Shop = () => {
           <div className="md:w-[80%]">
             <h3
               style={{ marginBottom: "10px" }}
-              className=" text-xl font-medium"
+              className=" text-xl font-semibold"
             >
-              Products Availables {products.length}
+              Showing {startProduct} to {endProduct} of {totalProducts} Products
             </h3>
+            <hr style={{ marginBottom: "15px" }} className="text-gray-300" />
             <ProductsCards products={products} />
+
+            {/* pagination controls */}
+            <div style={{ marginTop: "40px" }} className="flex justify-center">
+              <button
+                disabled={currentPage === 1}
+                onClick={() => handlePageChange(currentPage - 1)}
+                style={{ padding: "8px 15px" }}
+                className={` bg-gray-300 text-gray-700 rounded-md ${
+                  currentPage === 1 ? " cursor-not-allowed" : "cursor-pointer"
+                }`}
+              >
+                Previous
+              </button>
+              {[...Array(totalPages)].map((_, index) => (
+                <button
+                  onClick={() => handlePageChange(index + 1)}
+                  style={{ padding: "8px 15px", margin: "0 5px" }}
+                  className={` rounded-md cursor-pointer ${
+                    currentPage === index + 1
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-300 text-gray-700"
+                  }`}
+                  key={index}
+                >
+                  {index + 1}
+                </button>
+              ))}
+              <button
+                disabled={currentPage === totalPages}
+                onClick={() => handlePageChange(currentPage + 1)}
+                style={{ padding: "8px 15px" }}
+                className={` bg-gray-300 text-gray-700 rounded-md ${
+                  currentPage === totalPages
+                    ? " cursor-not-allowed"
+                    : "cursor-pointer"
+                }`}
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
       </section>
