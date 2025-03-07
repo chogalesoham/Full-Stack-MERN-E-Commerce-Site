@@ -22,7 +22,12 @@ const ShopFiltering = ({
 
   return (
     <div className="space-y-5 flex-shrink-0 flex flex-col items-start justify-start gap-6 md:w-[15%]">
-      <h3 className="text-xl font-medium mb-4">Filters</h3>
+      <h3
+        style={{ paddingBottom: "9px" }}
+        className="text-xl font-medium mb-4 border-b-1 border-gray-300 w-full"
+      >
+        Filters
+      </h3>
 
       {/* Filter by Category */}
       <div className="flex flex-col space-y-2 gap-1 w-full">
