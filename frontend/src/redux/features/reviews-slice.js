@@ -17,7 +17,7 @@ export const reviewApi = createApi({
         body: reviewData,
       }),
       invalidatesTags: (result, error, { postId }) => [
-        { type: "Reviews", id: postId },
+        { type: "Reviews", id: productId },
       ],
     }),
 

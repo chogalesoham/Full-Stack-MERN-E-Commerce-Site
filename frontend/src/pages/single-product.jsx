@@ -5,13 +5,13 @@ import { useDispatch } from "react-redux";
 import { useGetSingleProductQuery } from "../redux/features/products-slice";
 import { addToCart } from "../redux/features/cart-slice";
 import toast from "react-hot-toast";
+import ReviewSection from "../componets/review-section";
 
 const SingleProduct = () => {
   const { id } = useParams();
 
   const dispatch = useDispatch();
   const { data, error, isLoading } = useGetSingleProductQuery(id);
-  console.log(data);
 
   const SingleProduct = data?.product || {};
   const productReview = data?.reviews || {};
@@ -93,7 +93,9 @@ const SingleProduct = () => {
         </div>
       </section>
 
-      <section className=" section__container">Review Here</section>
+      {/* Review Section */}
+
+      <ReviewSection productReview={productReview} />
     </>
   );
 };
