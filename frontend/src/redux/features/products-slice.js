@@ -31,7 +31,10 @@ const productApi = createApi({
       },
       providesTags: ["Products"],
     }),
-
+    getTrandingProducts: builder.query({
+      query: () => "/tranding",
+      providesTags: ["Products"],
+    }),
     getSingleProduct: builder.query({
       query: (id) => `/${id}`,
       providesTags: (result, error, id) => [{ type: "Products", id }],
@@ -79,6 +82,7 @@ export const {
   useGetRelatedProductsQuery,
   useUpdateProductMutation,
   useDeleteProductMutation,
+  useGetTrandingProductsQuery,
 } = productApi;
 
 export default productApi;
