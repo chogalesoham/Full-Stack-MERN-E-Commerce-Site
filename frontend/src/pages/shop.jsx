@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import productData from "../data/products.json";
 import ProductsCards from "../componets/product-card";
 import ShopFiltering from "../componets/shop-filtering";
 import { useGetAllProductsQuery } from "../redux/features/products-slice";
