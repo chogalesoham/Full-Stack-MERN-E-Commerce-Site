@@ -75,6 +75,20 @@ const getAllProducts = async (req, res) => {
   }
 };
 
+// get trending products
+const getTrendingProducts = async (req, res) => {
+  try {
+    const products = await productsModel
+      .find()
+      .limit(20)
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({ message: "Trending Products", products });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // get single Product
 const getSingleProduct = async (req, res) => {
   try {
@@ -172,4 +186,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   SingleProductRelatedProducts,
+  getTrendingProducts,
 };
