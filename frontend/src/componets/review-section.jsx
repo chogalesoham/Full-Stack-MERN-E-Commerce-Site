@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-
 import commentIcon from "../assets/avatar.png";
 import { formatDate } from "../utils/formate-date";
 import RatingStar from "./rating-star";
 import PostReviewModel from "./post-review-model";
 
-const ReviewSection = ({ productReview }) => {
+const ReviewSection = ({ productReview, refetchProduct }) => {
+  // Accept the refetchProduct prop
   const [showModel, setShowModel] = useState(false);
   console.log(productReview);
 
@@ -19,7 +19,7 @@ const ReviewSection = ({ productReview }) => {
             </h3>
             <div style={{ marginTop: "10px" }}>
               {productReview.map((review, index) => (
-                <div>
+                <div key={index}>
                   <div className=" flex gap-4 items-center">
                     <img src={commentIcon} alt="" className=" size-14" />
                     <div className=" space-y-1">
@@ -29,9 +29,9 @@ const ReviewSection = ({ productReview }) => {
                       <p className=" text-[12px] italic">
                         {formatDate(review?.updatedAt)}
                       </p>
-                      <p>
+                      <div>
                         <RatingStar ratings={review?.rating} />
-                      </p>
+                      </div>
                     </div>
                   </div>
                   <div
@@ -45,11 +45,11 @@ const ReviewSection = ({ productReview }) => {
             </div>
           </div>
         ) : (
-          <p> Not Review Yet </p>
+          <p> No Reviews Yet </p>
         )}
       </div>
 
-      {/* add review button */}
+      {/* Add Review Button */}
       <div style={{ marginTop: "15px" }}>
         <button
           onClick={() => setShowModel(!showModel)}
@@ -60,9 +60,13 @@ const ReviewSection = ({ productReview }) => {
         </button>
       </div>
 
-      {/* review model */}
+      {/* Review Modal */}
       {showModel && (
-        <PostReviewModel showModel={showModel} setShowModel={setShowModel} />
+        <PostReviewModel
+          showModel={showModel}
+          setShowModel={setShowModel}
+          refetchProduct={refetchProduct} // Pass refetchProduct to the modal
+        />
       )}
     </div>
   );
