@@ -11,10 +11,10 @@ const SingleProduct = () => {
   const { id } = useParams();
 
   const dispatch = useDispatch();
-  const { data, error, isLoading } = useGetSingleProductQuery(id);
+  const { data, error, isLoading, refetch } = useGetSingleProductQuery(id);
 
   const SingleProduct = data?.product || {};
-  const productReview = data?.reviews || {};
+  const productReview = data?.reviews || [];
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
@@ -69,12 +69,12 @@ const SingleProduct = () => {
               {SingleProduct?.description}
             </p>
             <div>
-              <p className="margin-b">
+              <div className="margin-b">
                 <strong>Category: </strong> {SingleProduct?.category}
-              </p>
-              <p className=" margin-b">
+              </div>
+              <div className=" margin-b">
                 <strong>Color: </strong> {SingleProduct?.color}
-              </p>
+              </div>
               <div className=" flex gap-1 items-center margin-b">
                 <strong>Rating: </strong>
                 <RatingStar ratings={SingleProduct?.rating} />
@@ -95,7 +95,7 @@ const SingleProduct = () => {
 
       {/* Review Section */}
 
-      <ReviewSection productReview={productReview} />
+      <ReviewSection productReview={productReview} refetchProduct={refetch} />
     </>
   );
 };

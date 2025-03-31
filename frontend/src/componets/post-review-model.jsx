@@ -25,23 +25,19 @@ const StarRating = ({ rating, setRating }) => {
   );
 };
 
-const PostReviewModel = ({ setShowModel, showModel }) => {
+const PostReviewModel = ({ setShowModel, showModel, refetchProduct }) => {
   const { id } = useParams();
   const { user } = useSelector((state) => state.auth);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
-  const { refetch } = useGetReviewsByUserIdQuery(id, { skip: !id });
+  // const { refetch } = useGetReviewsByUserIdQuery(id, { skip: !id });
   const [postReview, { isLoading }] = usePostReviewMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!rating) {
-      return toast.error("Please select a rating.");
-    }
-    if (!comment.trim()) {
-      return toast.error("Please enter a review.");
-    }
+    if (!rating) return toast.error("Please select a rating.");
+    if (!comment.trim()) return toast.error("Please enter a review.");
 
     const newComment = {
       comment,
@@ -53,13 +49,13 @@ const PostReviewModel = ({ setShowModel, showModel }) => {
     try {
       await postReview(newComment).unwrap();
       toast.success("Review Posted Successfully");
-      s;
       setShowModel(false);
       setRating(0);
       setComment("");
-      refetch();
+      refetchProduct();
     } catch (error) {
       toast.error("Error Posting Review");
+      setShowModel(false);
     }
   };
 
