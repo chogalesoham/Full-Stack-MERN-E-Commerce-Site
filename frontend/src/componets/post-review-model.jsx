@@ -53,6 +53,7 @@ const PostReviewModel = ({ setShowModel, showModel }) => {
     try {
       await postReview(newComment).unwrap();
       toast.success("Review Posted Successfully");
+      s;
       setShowModel(false);
       setRating(0);
       setComment("");

@@ -8,6 +8,8 @@ import SingleProduct from "../pages/single-product.jsx";
 import Cart from "../pages/cart.jsx";
 import Login from "../pages/login.jsx";
 import Register from "../pages/ragister.jsx";
+import About from "../pages/about.jsx";
+import Contact from "../pages/contact.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,11 +41,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <div>About page</div>,
+        element: <About />,
       },
       {
         path: "/contact",
-        element: <div>Contact page</div>,
+        element: <Contact />,
       },
     ],
   },
