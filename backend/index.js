@@ -17,7 +17,7 @@ connectDB();
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://full-stack-mern-e-commerce-site-hfla.vercel.app",
     credentials: true,
   })
 );
