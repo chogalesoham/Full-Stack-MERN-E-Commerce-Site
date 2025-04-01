@@ -100,7 +100,7 @@ const Header = () => {
                     className="absolute right-0 bg-white shadow-md rounded-lg w-48 z-40 border border-gray-200"
                     style={{ marginTop: "8px", padding: "10px" }}
                   >
-                    <ul style={{ padding: "5px" }}>
+                    {/* <ul style={{ padding: "5px" }}>
                       {dropdownMenus.map((menu, index) => (
                         <li key={index} style={{ marginBottom: "4px" }}>
                           <Link
@@ -112,7 +112,7 @@ const Header = () => {
                           </Link>
                         </li>
                       ))}
-                    </ul>
+                    </ul> */}
 
                     {/* Logout Button */}
                     <button
