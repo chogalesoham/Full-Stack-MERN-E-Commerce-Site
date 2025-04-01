@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import OrderSummary from "../componets/order-summary";
-import EmptyCart from "../assets/empty-cart.AVIF";
+import EmptyCart from "../assets/empty-cart.avif";
 import { removeFromCart, updateQuantity } from "../redux/features/cart-slice";
 import toast from "react-hot-toast";
 
