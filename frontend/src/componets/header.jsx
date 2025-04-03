@@ -74,16 +74,18 @@ const Header = () => {
             </Link>
           </span>
           <span>
-            <Link to="cart" className=" hover:text-[#ed3849] relative">
-              <HiOutlineShoppingBag className=" text-xl" />
+            {user && (
+              <Link to="cart" className=" hover:text-[#ed3849] relative">
+                <HiOutlineShoppingBag className=" text-xl" />
 
-              <sup
-                className=" text-sm absolute h-5 w-5 to-10% text-white rounded-full bg-[#ed3849] text-center
+                <sup
+                  className=" text-sm absolute h-5 w-5 to-10% text-white rounded-full bg-[#ed3849] text-center
             "
-              >
-                {products.length}
-              </sup>
-            </Link>
+                >
+                  {products.length}
+                </sup>
+              </Link>
+            )}
           </span>
           <span style={{ marginBottom: "6px" }} className=" mb-3">
             {user ? (
