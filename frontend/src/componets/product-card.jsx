@@ -1,14 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdAddShoppingCart } from "react-icons/md";
 import RatingStar from "./rating-star";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/features/cart-slice";
 import toast from "react-hot-toast";
 
 const ProductCard = ({ products }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth);
 
   const handleAddToCart = (product) => {
+    if (!user) {
+      toast.error("Please login to add items to cart", {
+        duration: 2000,
+        position: "top-right",
+      });
+      navigate("/login");
+      return;
+    }
+
     dispatch(addToCart(product));
     toast.success("Product added to cart", {
       duration: 2000,
